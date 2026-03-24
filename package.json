@@ -1,0 +1,21 @@
+{
+  "name": "skillgap-ai",
+  "version": "1.0.0",
+  "description": "SkillGap AI - AI-powered career skill gap analyzer with chatbot assistant",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["skill-gap", "ai", "career", "resume", "job-match"],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.6",
+    "express": "^4.18.2",
+    "form-data": "^4.0.5",
+    "multer": "^1.4.5-lts.1"
+  }
+}

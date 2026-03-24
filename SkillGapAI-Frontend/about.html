@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About SkillGapAI — The Technical Vision</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/theme-loader.js"></script>
+    <style>
+        .about-hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+        }
+
+        .about-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem 100px;
+        }
+
+        .about-section {
+            margin-bottom: 4rem;
+            animation: fadeInUp 0.6s ease backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .about-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            height: 100%;
+        }
+
+        .about-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, var(--accent-lt) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .tech-pill {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--accent-lt);
+            margin: 0.3rem;
+        }
+
+        .logic-step {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-glow);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--accent-lt);
+            font-weight: 800;
+        }
+
+        .limit-box {
+            background: var(--danger-bg);
+            border: 1px solid var(--danger-bd);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            color: var(--danger);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .future-box {
+            background: var(--success-bg);
+            border: 1px solid var(--success-bd);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            color: var(--success);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        ul.check-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.check-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            gap: 0.8rem;
+            color: var(--t2);
+        }
+
+        ul.check-list li::before {
+            content: '→';
+            color: var(--accent-lt);
+            font-weight: 800;
+        }
+
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
+                </div>
+                <span class="logo-text" id="logo-text-full">SkillGap<span class="logo-accent">AI</span></span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="side-link">
+                    <span class="s-icon">🏠</span> <span class="s-text">Home</span>
+                </a>
+                <a href="dashboard.html" class="side-link">
+                    <span class="s-icon">📊</span> <span class="s-text">Overview</span>
+                </a>
+                <a href="roadmap.html" class="side-link">
+                    <span class="s-icon">🗺️</span> <span class="s-text">Learning Paths</span>
+                </a>
+                <a href="jobs.html" class="side-link">
+                    <span class="s-icon">💼</span> <span class="s-text">Job Matches</span>
+                </a>
+                <a href="compare.html" class="side-link">
+                    <span class="s-icon">⚖️</span> <span class="s-text">Compare</span>
+                </a>
+                <a href="history.html" class="side-link">
+                    <span class="s-icon">🕒</span> <span class="s-text">History</span>
+                </a>
+                <a href="about.html" class="side-link active">
+                    <span class="s-icon">ℹ️</span> <span class="s-text">About</span>
+                </a>
+                <a href="settings.html" class="side-link">
+                    <span class="s-icon">⚙️</span> <span class="s-text">Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="nav-pill" style="margin-bottom: 1rem; width: 100%; justify-content: center;">
+                    <span class="pulse-dot"></span>
+                    <span class="s-text">NLP Active</span>
+                </div>
+                <button id="theme-toggle-btn" class="btn-ghost side-btn" title="Toggle Theme"
+                    style="width: 100%; margin-bottom: 0.5rem; justify-content: center; display: flex;">
+                    <span class="icon-moon">🌙</span>
+                    <span class="icon-sun" style="display:none;">☀️</span>
+                    <span class="s-text" style="margin-left: 0.5rem;">Theme</span>
+                </button>
+                <button class="btn-ghost side-btn" id="logout-btn" style="width: 100%; justify-content: center;">🚪
+                    <span class="s-text">Logout</span></button>
+            </div>
+        </aside>
+
+        <!-- MAIN LAYOUT WRAPPER -->
+        <main class="app-main">
+
+            <header class="about-hero">
+                <div class="container">
+                    <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem;">Technical Deep Dive</h1>
+                    <p style="color: var(--t2); font-size: 1.25rem;">Understanding the logic behind SkillGapAI</p>
+                </div>
+            </header>
+
+            <main class="about-container">
+
+                <!-- Internship Portfolio -->
+                <section class="about-section">
+                    <div class="about-card"
+                        style="background: linear-gradient(135deg, var(--bg2) 0%, rgba(79, 70, 229, 0.05) 100%); border: 1px solid var(--accent);">
+                        <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
+                            <div style="font-size: 2.5rem;">🎓</div>
+                            <div>
+                                <h3 style="margin-bottom: 0;">Internship Project Spotlight</h3>
+                                <p style="color: var(--accent-lt); font-weight: 600;">Technical Portfolio Development
+                                </p>
+                            </div>
+                        </div>
+                        <p style="color: var(--t2); line-height: 1.8;">
+                            This platform was developed as a core milestone for a <b>Professional Software Engineering
+                                Internship</b>.
+                            The objective was to bridge the gap between academic theory and industry-grade application
+                            by implementing
+                            advanced NLP (Natural Language Processing) and providing a premium, production-ready user
+                            experience.
+                            Key achievements include the integration of hybrid extraction models and a real-time
+                            responsive dashboard.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Architecture & Tools -->
+                <section class="about-section">
+                    <h2 style="margin-bottom: 2rem;">Technology Stack</h2>
+                    <div class="card-grid">
+                        <div class="about-card">
+                            <h3>Frontend Stack</h3>
+                            <p style="color: var(--t2); margin-bottom: 1.5rem;">Built with modern Web standards for
+                                maximum performance and responsiveness.</p>
+                            <div style="display:flex; flex-wrap:wrap;">
+                                <span class="tech-pill">Vanilla JS (ES6+)</span>
+                                <span class="tech-pill">CSS3 Glassmorphism</span>
+                                <span class="tech-pill">Chart.js 4.0</span>
+                                <span class="tech-pill">Local Storage Persistence</span>
+                            </div>
+                        </div>
+                        <div class="about-card">
+                            <h3>Backend Intelligence</h3>
+                            <p style="color: var(--t2); margin-bottom: 1.5rem;">Leveraging Python's robust AI ecosystem
+                                for deep semantic analysis.</p>
+                            <div style="display:flex; flex-wrap:wrap;">
+                                <span class="tech-pill">Flask API</span>
+                                <span class="tech-pill">SpaCy (NLP)</span>
+                                <span class="tech-pill">BERT (Sentence-Transformers)</span>
+                                <span class="tech-pill">PyPDF2 / Docx / TXT</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Extraction Logic -->
+                <section class="about-section">
+                    <h2 style="margin-bottom: 2rem;">Skill Extraction Logic (Hybrid Model)</h2>
+                    <div class="about-card">
+                        <div class="logic-step">
+                            <div class="step-icon">1</div>
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem; font-weight: 700;">Text Normalization</h4>
+                                <p style="color: var(--t2);">Raw text is pre-processed to remove noise, normalize case,
+                                    and handle special characters, ensuring accurate matching of tech terms like .Net,
+                                    C++, and Node.js.</p>
+                            </div>
+                        </div>
+                        <div class="logic-step">
+                            <div class="step-icon">2</div>
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem; font-weight: 700;">Hybrid Extraction Pipeline</h4>
+                                <p style="color: var(--t2);">The engine combines three layers of detection:
+                                <ul style="margin-top: 0.5rem; color: var(--t2); font-size: 0.9rem;">
+                                    <li><b>Keyword Match:</b> Fast, accurate regex-based lookup for 250+ standard
+                                        skills.</li>
+                                    <li><b>SpaCy NER:</b> Uses Linguistic features to identify entities in the resume.
+                                    </li>
+                                    <li><b>BERT Semantics:</b> Uses SBERT (Sentence-BERT) to understand the *context*
+                                        and extract skills that keyword matching might miss.</li>
+                                </ul>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="logic-step">
+                            <div class="step-icon">3</div>
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem; font-weight: 700;">AI Optimization</h4>
+                                <p style="color: var(--t2);">Beyond just gap analysis, the system identifies missing
+                                    skills from the JD and suggests how to naturally incorporate them into the
+                                    "Optimized Resume" preview.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Current State -->
+                <section class="about-section">
+                    <div class="card-grid">
+                        <div>
+                            <h2 style="margin-bottom: 1.5rem;">Project Status</h2>
+                            <ul class="check-list">
+                                <li>Multi-format support for PDF, DOCX, and TXT files.</li>
+                                <li>Real-time dashboard with Donut, Radar, and Bar charts.</li>
+                                <li>AI-Suggested Resume Optimization & Comparison.</li>
+                                <li>Personalized Learning Path & Roadmap generation.</li>
+                                <li>Exportable Analysis History & Session Security.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h2 style="margin-bottom: 1.5rem;">Why it matters</h2>
+                            <p style="color: var(--t2); line-height: 1.6;">
+                                In an era where 75%+ of resumes are filtered by bots, this tool levels the playing
+                                field. By understanding how your skills map to a job's specific requirements, you can
+                                optimize your application before it ever hits a recruiter's desk.
+                            </p>
+                            <div class="future-box">
+                                <b>Mission:</b> Empowering candidates with the same AI insight used by top-tier
+                                recruitment agencies.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+
+            <footer class="footer">
+                <div class="container" style="text-align: center;">
+                    <p class="t3">SkillGapAI Project © 2026 | Built for the Future of Recruitment</p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script>
+        // Adjust Nav action based on session
+        document.addEventListener('DOMContentLoaded', () => {
+            const session = localStorage.getItem('user_session');
+            const btn = document.getElementById('nav-action');
+            if (session) {
+                btn.textContent = 'Go to Dashboard';
+                btn.onclick = () => window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
+</body>
+
+</html>
