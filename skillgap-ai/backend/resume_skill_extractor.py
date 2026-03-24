@@ -7,26 +7,27 @@ import PyPDF2
 import docx
 
 # For NLP and keyword extraction
-import spacy
+# import spacy
 
 # For semantic extraction
-from sentence_transformers import SentenceTransformer, util
+
 
 # Optional: Disable tokenizers parallelism warning
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 # Global Models and Constants
 # We try loading the lightweight spaCy model; if missing, download it.
-try:
-    nlp = spacy.load("en_core_web_sm")
-except OSError:
-    import spacy.cli
-    spacy.cli.download("en_core_web_sm")
-    nlp = spacy.load("en_core_web_sm")
+# try:
+#     nlp = spacy.load("en_core_web_sm")
+# except OSError:
+#     import spacy.cli
+#     spacy.cli.download("en_core_web_sm")
+#     nlp = spacy.load("en_core_web_sm")
+nlp = None
 
 # Load Sentence transformer model
 # all-MiniLM-L6-v2 is specifically requested
-sem_model = SentenceTransformer('all-MiniLM-L6-v2')
+
 
 # Expanded default skill list for keyword and semantic matching
 DEFAULT_SKILLS = [
@@ -43,11 +44,7 @@ DEFAULT_SKILLS = [
 # Cache for skill embeddings to avoid re-encoding on every request
 SKILL_EMBEDDINGS_CACHE = {}
 
-def get_skill_embeddings(skills_list):
-    skills_tuple = tuple(sorted(skills_list))
-    if skills_tuple not in SKILL_EMBEDDINGS_CACHE:
-        SKILL_EMBEDDINGS_CACHE[skills_tuple] = sem_model.encode(skills_list, convert_to_tensor=True)
-    return SKILL_EMBEDDINGS_CACHE[skills_tuple]
+
 
 def validate_file(file_path: str) -> str:
     """
@@ -130,78 +127,11 @@ def extract_skills_keyword(text: str, skills_list: list) -> list:
             
     return list(extracted_skills)
 
-def extract_skills_spacy(text: str, skills_list: list) -> list:
-    """
-    Extracts skills using spaCy NLP model:
-    - Tokenization
-    - Noun phrase extraction
-    - Match against the skill list
-    """
-    doc = nlp(text)
-    extracted_skills = set()
-    skills_set = set(skills_list)
-    
-    # Match against Noun Phrases (noun chunks)
-    for chunk in doc.noun_chunks:
-        chunk_text = chunk.text.strip()
-        if chunk_text in skills_set:
-            extracted_skills.add(chunk_text)
-            
-    # Also examine individual tokens just in case
-    for token in doc:
-        token_text = token.text.strip()
-        if token_text in skills_set:
-            extracted_skills.add(token_text)
-            
-    return list(extracted_skills)
+def extract_skills_spacy(text, skills_list):
+    return []
 
-def extract_skills_bert(text: str, skills_list: list, threshold: float = 0.65) -> list:
-    """
-    Extracts skills using BERT-based semantic extraction:
-    - Uses sentence-transformers (all-MiniLM-L6-v2)
-    - Converts sentences and skill list to embeddings
-    - Computes cosine similarity
-    - Filters matched skills based on the score threshold
-    """
-    doc = nlp(text)
-    candidate_phrases = []
-    
-    # 1. Use spacy's sentence boundary detection
-    for sent in doc.sents:
-        s = sent.text.strip()
-        if s and len(s) > 2:
-            candidate_phrases.append(s)
-            
-    # 2. Add noun chunks to provide more localized contexts
-    for chunk in doc.noun_chunks:
-        c = chunk.text.strip()
-        if c and len(c) > 2 and c not in candidate_phrases:
-            candidate_phrases.append(c)
-            
-    if not candidate_phrases:
-        if text.strip():
-            candidate_phrases = [text.strip()]
-        else:
-            return []
-
-    # Get cached embeddings or encode
-    skill_embeddings = get_skill_embeddings(skills_list)
-    phrase_embeddings = sem_model.encode(candidate_phrases, convert_to_tensor=True)
-    
-    # Compute Cosine Similarity between phrase candidates and skills
-    # Output shape: (len(candidate_phrases), len(skills_list))
-    cosine_scores = util.cos_sim(phrase_embeddings, skill_embeddings)
-    
-    extracted_skills = set()
-    
-    # Loop over similarity matrix to find associations above the threshold
-    for i in range(len(candidate_phrases)):
-        # vectorized threshold check for speed
-        matches = (cosine_scores[i] >= threshold).nonzero()
-        for idx in matches:
-            extracted_skills.add(skills_list[idx.item()])
-                
-    return list(extracted_skills)
+def extract_skills_bert(text, skills_list, threshold=0.65):
+    return []
 
 def optimize_resume(original_text: str, missing_skills: list) -> str:
     """
